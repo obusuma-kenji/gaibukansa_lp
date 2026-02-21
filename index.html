@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>育成就労制度 外部監査人 完全ガイド｜社労士・行政書士のための新制度対応</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #f0faf3;
+            --navy-mid: #e2f5e8;
+            --navy-light: #c8ebd4;
+            --gold: #c8973a;
+            --gold-light: #e8b45a;
+            --gold-pale: #7a4f1a;
+            --teal: #1a6b3a;
+            --white: #1a3a26;
+            --slate: #4a7060;
+            --text: #2a4a38;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            background: var(--navy);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(240, 250, 243, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(200, 151, 58, 0.2);
+        }
+
+        .nav-logo {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 0.85rem;
+            color: var(--gold);
+            letter-spacing: 0.05em;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--navy);
+            border: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 4px;
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(200, 151, 58, 0.4);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(180, 230, 200, 0.8) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 80% 80%, rgba(200, 151, 58, 0.08) 0%, transparent 60%),
+                linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(80, 160, 100, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(80, 160, 100, 0.06) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            padding: 0.4rem 1.2rem;
+            border-radius: 2px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.2s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(2.4rem, 6vw, 5rem);
+            line-height: 1.2;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.4s forwards;
+        }
+
+        .hero-title .accent {
+            color: var(--gold);
+            display: block;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--slate);
+            line-height: 1.9;
+            max-width: 680px;
+            margin: 0 auto 3rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.6s forwards;
+        }
+
+        .hero-video {
+            width: 100%;
+            max-width: 780px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(200, 151, 58, 0.25);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.15), 0 0 0 1px rgba(200,151,58,0.1);
+            opacity: 0;
+            animation: fadeUp 0.8s 0.8s forwards;
+            margin: 0 auto;
+        }
+
+        .hero-video video {
+            width: 100%;
+            display: block;
+        }
+
+        /* ===== SCROLL INDICATOR ===== */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--slate);
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            z-index: 2;
+            animation: fadeIn 1.5s 1.5s forwards;
+            opacity: 0;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: scrollDrop 1.5s infinite;
+        }
+
+        /* ===== SECTION BASE ===== */
+        .section {
+            padding: 8rem 2rem;
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-body {
+            color: var(--slate);
+            font-size: 1.05rem;
+            line-height: 2;
+        }
+
+        /* ===== ALERT BOX ===== */
+        .alert-box {
+            background: rgba(200, 151, 58, 0.08);
+            border: 1px solid rgba(200, 151, 58, 0.35);
+            border-left: 4px solid var(--gold);
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .alert-box p {
+            color: var(--gold-pale);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .alert-box strong {
+            color: var(--gold-light);
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(200, 151, 58, 0.3), transparent);
+            margin: 0 2rem;
+        }
+
+        /* ===== INFOGRAPHIC SECTION ===== */
+        .infographic-section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .infographic-section .inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .infographic-img {
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid rgba(200, 151, 58, 0.2);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+            display: block;
+            margin-top: 3rem;
+        }
+
+        /* ===== THREE PILLARS ===== */
+        .pillars-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, transparent, rgba(200, 235, 210, 0.3), transparent);
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 3rem auto 0;
+        }
+
+        .pillar-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(100, 180, 130, 0.25);
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(200, 151, 58, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .pillar-card:hover {
+            border-color: rgba(200, 151, 58, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .pillar-card:hover::before { opacity: 1; }
+
+        .pillar-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: rgba(200, 151, 58, 0.15);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .pillar-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .pillar-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .pillar-body {
+            color: var(--slate);
+            font-size: 0.95rem;
+            line-height: 1.9;
+        }
+
+        .pillar-highlight {
+            display: inline-block;
+            background: rgba(200, 151, 58, 0.15);
+            color: var(--gold-light);
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 2px;
+            margin-top: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== STEP FLOW ===== */
+        .flow-section {
+            padding: 6rem 2rem;
+            background: rgba(200, 235, 210, 0.3);
+        }
+
+        .flow-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .flow-steps { grid-template-columns: 1fr; }
+        }
+
+        .flow-step {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            position: relative;
+        }
+
+        .flow-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -0.5rem;
+            top: 3rem;
+            font-size: 1.5rem;
+            color: var(--gold);
+            opacity: 0.4;
+        }
+
+        @media (max-width: 768px) {
+            .flow-step:not(:last-child)::after {
+                content: '↓'; right: auto; left: 50%; top: auto; bottom: -1rem; transform: translateX(-50%);
+            }
+        }
+
+        .step-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+            background: rgba(200, 151, 58, 0.08);
+            position: relative;
+        }
+
+        .step-num {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 24px;
+            height: 24px;
+            background: var(--gold);
+            color: var(--navy);
+            border-radius: 50%;
+            font-size: 0.7rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .step-body {
+            color: var(--slate);
+            font-size: 0.9rem;
+            line-height: 1.9;
+        }
+
+        /* ===== STATS ROW ===== */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(100, 180, 130, 0.25);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            color: var(--gold);
+            letter-spacing: 0.05em;
+            line-height: 1;
+        }
+
+        .stat-unit {
+            font-size: 1.2rem;
+            color: var(--gold-light);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--slate);
+            margin-top: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== REQUIREMENTS SECTION ===== */
+        .req-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, transparent, rgba(200, 235, 210, 0.3), transparent);
+        }
+
+        .req-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .req-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .req-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(100, 180, 130, 0.25);
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .req-card:hover {
+            border-color: rgba(200, 151, 58, 0.4);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .req-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: rgba(200, 151, 58, 0.15);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .req-icon { font-size: 2rem; margin-bottom: 1rem; }
+
+        .req-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .req-body {
+            color: var(--slate);
+            font-size: 0.92rem;
+            line-height: 1.9;
+        }
+
+        .req-tag {
+            display: inline-block;
+            background: rgba(200, 151, 58, 0.15);
+            color: var(--gold-light);
+            font-size: 0.78rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 2px;
+            margin-top: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== INDEPENDENCE SECTION ===== */
+        .indep-section {
+            padding: 6rem 2rem;
+        }
+
+        .indep-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .excl-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
+            margin-top: 2.5rem;
+        }
+
+        .excl-item {
+            background: rgba(255,255,255,0.7);
+            border: 1px solid rgba(200, 151, 58, 0.25);
+            border-left: 4px solid #c0392b;
+            border-radius: 8px;
+            padding: 1.5rem 1.8rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .excl-badge {
+            width: 28px; height: 28px;
+            background: #c0392b;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 900;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .excl-text strong {
+            display: block;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 4px;
+            font-size: 0.95rem;
+        }
+
+        .excl-text span {
+            font-size: 0.85rem;
+            color: var(--slate);
+            line-height: 1.7;
+        }
+
+        /* ===== DUTY TABLE SECTION ===== */
+        .duty-section {
+            padding: 6rem 2rem;
+            background: rgba(200, 235, 210, 0.3);
+        }
+
+        .duty-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .duty-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 3rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        }
+
+        .duty-table th {
+            background: var(--teal);
+            color: white;
+            padding: 1.2rem 1.5rem;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .duty-table td {
+            padding: 1.4rem 1.5rem;
+            border-bottom: 1px solid rgba(100,180,130,0.15);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: var(--text);
+            vertical-align: top;
+        }
+
+        .duty-table tr:last-child td { border-bottom: none; }
+
+        .duty-table tr:hover td { background: rgba(200,235,210,0.3); }
+
+        .duty-freq {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            background: rgba(200,151,58,0.12);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gold);
+            white-space: nowrap;
+        }
+
+        /* ===== TRANSITION SECTION ===== */
+        .trans-section {
+            padding: 6rem 2rem;
+        }
+
+        .trans-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .trans-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .trans-box {
+            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(100,180,130,0.3);
+            border-radius: 12px;
+            padding: 2rem 2.5rem;
+            min-width: 240px;
+            text-align: center;
+        }
+
+        .trans-box.gold-box {
+            border-color: rgba(200,151,58,0.4);
+            background: rgba(200,151,58,0.05);
+        }
+
+        .trans-box-sub {
+            font-size: 0.72rem;
+            color: var(--slate);
+            letter-spacing: 0.15em;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .trans-box-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .trans-box.gold-box .trans-box-title { color: var(--gold); }
+
+        .trans-arrow-icon {
+            font-size: 2rem;
+            color: var(--gold);
+            opacity: 0.6;
+        }
+
+        .trans-note {
+            background: rgba(200, 151, 58, 0.08);
+            border: 1px solid rgba(200, 151, 58, 0.3);
+            border-left: 4px solid var(--gold);
+            border-radius: 8px;
+            padding: 1.2rem 1.8rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--gold-pale);
+            line-height: 1.8;
+        }
+
+        /* ===== AUDIO PLAYER ===== */
+        .audio-section {
+            padding: 4rem 2rem;
+        }
+
+        .audio-inner {
+            max-width: 780px;
+            margin: 0 auto;
+        }
+
+        .audio-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(100, 180, 130, 0.3);
+            border-radius: 16px;
+            padding: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .audio-card { flex-direction: column; text-align: center; }
+        }
+
+        .audio-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--navy);
+            flex-shrink: 0;
+        }
+
+        .audio-info { flex: 1; }
+
+        .audio-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .audio-subtitle {
+            color: var(--slate);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        audio {
+            width: 100%;
+            height: 36px;
+            accent-color: var(--gold);
+        }
+
+        /* ===== CHECKLIST SECTION ===== */
+        .checklist-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, transparent, rgba(200, 235, 210, 0.3), transparent);
+        }
+
+        .checklist-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .check-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .check-columns { grid-template-columns: 1fr; }
+        }
+
+        .check-col {
+            background: rgba(255,255,255,0.7);
+            border: 1px solid rgba(100,180,130,0.25);
+            border-radius: 12px;
+            padding: 2.5rem;
+        }
+
+        .check-col-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(200,151,58,0.25);
+        }
+
+        .check-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .check-list li {
+            display: flex;
+            gap: 0.8rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text);
+            align-items: flex-start;
+        }
+
+        .chk {
+            width: 20px; height: 20px;
+            border: 2px solid rgba(200,151,58,0.5);
+            border-radius: 3px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* ===== QA SECTION ===== */
+        .qa-section {
+            padding: 6rem 2rem;
+            background: rgba(200, 235, 210, 0.3);
+        }
+
+        .qa-inner {
+            max-width: 780px;
+            margin: 0 auto;
+        }
+
+        .qa-item {
+            border-bottom: 1px solid rgba(200, 151, 58, 0.1);
+        }
+
+        .qa-question {
+            width: 100%;
+            text-align: left;
+            padding: 1.8rem 0;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            color: var(--text);
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .qa-q-num {
+            color: var(--gold);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            margin-top: -2px;
+        }
+
+        .qa-q-text { flex: 1; line-height: 1.6; }
+
+        .qa-arrow {
+            color: var(--gold);
+            font-size: 1rem;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .qa-arrow.open { transform: rotate(180deg); }
+
+        .qa-answer {
+            display: none;
+            padding: 0 0 2rem 2.5rem;
+            color: var(--slate);
+            font-size: 0.95rem;
+            line-height: 2;
+        }
+
+        .qa-answer strong { color: var(--white); }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--navy-mid), var(--navy));
+        }
+
+        .cta-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(200, 151, 58, 0.06) 0%, transparent 70%);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-title .gold { color: var(--gold); }
+
+        .cta-body {
+            color: var(--slate);
+            font-size: 1.05rem;
+            line-height: 2;
+            margin-bottom: 3rem;
+        }
+
+        .cta-box {
+            background: rgba(200, 151, 58, 0.08);
+            border: 1px solid rgba(200, 151, 58, 0.3);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-proposer {
+            color: var(--gold-pale);
+            font-size: 0.95rem;
+            line-height: 2.2;
+        }
+
+        .cta-proposer strong {
+            color: var(--gold-light);
+            font-size: 1.05rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            border-top: 1px solid rgba(100, 180, 130, 0.2);
+            padding: 2rem;
+            text-align: center;
+            color: var(--slate);
+            font-size: 0.8rem;
+            background: var(--navy-mid);
+        }
+
+        /* ===== DECORATIVE BG LABEL ===== */
+        .big-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(5rem, 12vw, 10rem);
+            color: rgba(80, 160, 100, 0.07);
+            letter-spacing: 0.1em;
+            position: absolute;
+            top: 2rem;
+            right: 0;
+            pointer-events: none;
+            user-select: none;
+            line-height: 1;
+        }
+
+        /* ===== GOLD LINE ===== */
+        .gold-line {
+            width: 40px;
+            height: 3px;
+            background: var(--gold);
+            margin: 1.5rem 0;
+        }
+
+        .gold-line.center { margin-left: auto; margin-right: auto; }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scrollDrop {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; transform: scaleY(0.5); transform-origin: top; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        @media (max-width: 768px) {
+            .req-grid, .excl-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== PDF SECTION ===== */
+        .pdf-section {
+            padding: 6rem 2rem;
+            background: rgba(200, 235, 210, 0.3);
+        }
+
+        .pdf-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pdf-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .pdf-cards { grid-template-columns: 1fr; }
+        }
+
+        .pdf-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(100, 180, 130, 0.25);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            transition: box-shadow 0.3s;
+        }
+
+        .pdf-card:hover {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        .pdf-card-header {
+            background: var(--teal);
+            padding: 1.4rem 1.8rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .pdf-card-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .pdf-card-meta {}
+
+        .pdf-card-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.65);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .pdf-card-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.5;
+        }
+
+        .pdf-iframe-wrap {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            background: #f5f5f5;
+        }
+
+        .pdf-iframe-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        .pdf-iframe-fallback {
+            display: none;
+            position: absolute;
+            inset: 0;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+            background: rgba(240,250,243,0.95);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .pdf-card-footer {
+            padding: 1.2rem 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid rgba(100,180,130,0.15);
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .pdf-pages {
+            font-size: 0.8rem;
+            color: var(--slate);
+        }
+
+        .pdf-dl-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: #1a2a10;
+            text-decoration: none;
+            padding: 0.7rem 1.4rem;
+            border-radius: 6px;
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(200, 151, 58, 0.25);
+            white-space: nowrap;
+        }
+
+        .pdf-dl-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(200, 151, 58, 0.4);
+        }
+
+        .pdf-dl-btn svg {
+            width: 16px; height: 16px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">育成就労制度 外部監査人 完全ガイド</div>
+        <div style="display:flex; gap:0.8rem; align-items:center;">
+            <button style="background:transparent; border:1px solid rgba(200,151,58,0.5); color:var(--gold); padding:0.55rem 1.1rem; border-radius:4px; font-family:'Zen Kaku Gothic New',sans-serif; font-weight:700; font-size:0.82rem; cursor:pointer; transition:all 0.3s;" onmouseover="this.style.background='rgba(200,151,58,0.1)'" onmouseout="this.style.background='transparent'" onclick="document.getElementById('pdf-docs').scrollIntoView({behavior:'smooth'})">📄 資料ダウンロード</button>
+            <button class="nav-cta" onclick="document.getElementById('checklist').scrollIntoView({behavior:'smooth'})">チェックリストを確認する</button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <div class="hero-tag">育成就労制度 新制度対応ガイド ｜ 監理支援機関・社労士・行政書士向け</div>
+            <h1 class="hero-title">
+                育成就労制度における<br>
+                <span class="accent">「外部監査人」の要件と役割</span>
+            </h1>
+            <p class="hero-subtitle">
+                外部監査人は、監理支援機関による指導・監督が適正かつ中立に行われているかを<br>
+                外部からチェックする重要な役割を担います。<br>
+                高い専門性と独立性が求められ、定期的な講習受講と頻繁な監査業務が義務付けられています。
+            </p>
+            <div class="hero-video">
+                <video controls poster="">
+                    <source src="育成就労の新制度_外部監査人_send.mp4" type="video/mp4">
+                    お使いのブラウザは動画に対応していません。
+                </video>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <span>SCROLL</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ===== AUDIO (ヒーロー直下) ===== -->
+    <section class="audio-section" style="padding-top: 3rem;">
+        <div class="audio-inner reveal">
+            <div class="section-label" style="text-align:center; margin-bottom:1.5rem;">AUDIO MESSAGE</div>
+            <div class="audio-card">
+                <div class="audio-icon">🎧</div>
+                <div class="audio-info">
+                    <div class="audio-title">育成就労の監理支援と外部監査</div>
+                    <div class="audio-subtitle">音声でもご確認いただけます</div>
+                    <audio controls>
+                        <source src="育成就労の監理支援と外部監査_send.m4a" type="audio/mp4">
+                        お使いのブラウザは音声に対応していません。
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS ROW ===== -->
+    <div class="stats-row">
+        <div class="stat-card reveal">
+            <div class="stat-num">3<span class="stat-unit">か月</span></div>
+            <div class="stat-label">業務遂行状況確認の最低頻度</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-1">
+            <div class="stat-num">1<span class="stat-unit">年</span></div>
+            <div class="stat-label">同行監査の最低頻度</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-2">
+            <div class="stat-num">3<span class="stat-unit">年</span></div>
+            <div class="stat-label">養成講習の更新サイクル</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-3">
+            <div class="stat-num">5<span class="stat-unit">年</span></div>
+            <div class="stat-label">独立性判定における除外期間</div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===== WHY / OVERVIEW ===== -->
+    <section class="section" style="position:relative; overflow:hidden;">
+        <div class="big-label">OVERVIEW</div>
+        <div class="section-label reveal">BACKGROUND</div>
+        <h2 class="section-title reveal">なぜ今、<br>外部監査人が重要なのか</h2>
+        <div class="gold-line reveal"></div>
+        <p class="section-body reveal" style="max-width:680px;">
+            技能実習制度の廃止と育成就労制度の創設により、監理機関のあり方が大きく変わります。
+            新制度では<strong style="color:var(--white)">「監理支援機関」</strong>が実施者への指導・監督を担う一方、
+            その適正性を第三者がチェックする<strong style="color:var(--white)">「外部監査人」</strong>の設置が必須となりました。
+        </p>
+        <div class="alert-box reveal">
+            <p>⚠️ <strong>外部監査人は監理支援機関の許可要件の一つです。</strong><br>
+            社労士・行政書士・弁護士は、独立性の要件を満たせば就任可能です。<br>
+            新たな専門職としてのキャリアを検討してください。</p>
+        </div>
+    </section>
+
+    <!-- ===== INFOGRAPHIC ===== -->
+    <section class="infographic-section">
+        <div class="inner">
+            <div class="section-label reveal" style="text-align:center">GOVERNANCE STRUCTURE</div>
+            <h2 class="section-title reveal" style="text-align:center; max-width:700px; margin:0 auto">
+                三者関係と外部からの視点<br>ガバナンス構造の全貌
+            </h2>
+            <img src="unnamed__34_.png" alt="育成就労制度 外部監査人 インフォグラフィック" class="infographic-img reveal">
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ===== THREE PILLARS (選任基準) ===== -->
+    <section class="pillars-section">
+        <div style="text-align:center; max-width:1100px; margin:0 auto;">
+            <div class="section-label reveal">SELECTION CRITERIA</div>
+            <h2 class="section-title reveal">外部監査人の<br>選任基準と資格要件</h2>
+            <div class="gold-line center reveal"></div>
+            <p class="section-body reveal">高度な専門性・継続的研鑽・厳格な独立性の3つが必須要件</p>
+        </div>
+        <div class="pillars-grid">
+            <div class="pillar-card reveal">
+                <div class="pillar-num">01</div>
+                <div class="pillar-icon">⚖️</div>
+                <h3 class="pillar-title">高度な専門性を持つ資格者</h3>
+                <p class="pillar-body">
+                    弁護士、社会保険労務士、行政書士として登録された専門家、
+                    または出入国・労働関係法令について高度な知識を持つ大学教授等が対象となります。
+                    法人としての就任も可能です。
+                </p>
+                <span class="pillar-highlight">資格者 / 有識者 ／ 法人可</span>
+            </div>
+            <div class="pillar-card reveal reveal-delay-1">
+                <div class="pillar-num">02</div>
+                <div class="pillar-icon">📚</div>
+                <h3 class="pillar-title">3年ごとの養成講習の受講</h3>
+                <p class="pillar-body">
+                    選任前3年以内の受講と、就任後も3年ごとの継続的な受講が義務付けられています。
+                    法人が選任される場合は、実際に監査を担当する個人が受講することが必要です。
+                </p>
+                <span class="pillar-highlight">就任前3年以内 ／ 就任後3年ごと</span>
+            </div>
+            <div class="pillar-card reveal reveal-delay-2">
+                <div class="pillar-num">03</div>
+                <div class="pillar-icon">🔒</div>
+                <h3 class="pillar-title">厳格な独立性の確保</h3>
+                <p class="pillar-body">
+                    監理支援機関や受入先の役職員、親族、顧問先など「密接な関係」にある者は就任できません。
+                    過去5年以内の関係も対象となります。
+                </p>
+                <span class="pillar-highlight">過去5年 ／ 二親等以内 ／ 顧問先不可</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STEP FLOW (養成ステップ) ===== -->
+    <section class="flow-section">
+        <div class="flow-inner">
+            <div class="section-label reveal" style="text-align:center">CAREER STEPS</div>
+            <h2 class="section-title reveal" style="text-align:center">外部監査人になるための<br>養成ステップ</h2>
+            <div class="gold-line center reveal"></div>
+            <p class="section-body reveal" style="text-align:center; max-width:640px; margin:0 auto;">
+                資格確認から実務サイクルまで、<strong style="color:var(--white)">5つのステップ</strong>で体系的に準備する
+            </p>
+
+            <div class="flow-steps" style="grid-template-columns: repeat(5,1fr);">
+                <div class="flow-step reveal" style="padding:2rem 1rem;">
+                    <div class="step-circle" style="width:64px;height:64px;font-size:1.4rem;">
+                        ✅<span class="step-num">1</span>
+                    </div>
+                    <h3 class="step-title" style="font-size:1rem;">資格確認</h3>
+                    <p class="step-body" style="font-size:0.82rem;">
+                        弁護士・社労士・行政書士・有識者のいずれかであることを確認する
+                    </p>
+                </div>
+                <div class="flow-step reveal reveal-delay-1" style="padding:2rem 1rem;">
+                    <div class="step-circle" style="width:64px;height:64px;font-size:1.4rem;">
+                        📋<span class="step-num">2</span>
+                    </div>
+                    <h3 class="step-title" style="font-size:1rem;">講習受講</h3>
+                    <p class="step-body" style="font-size:0.82rem;">
+                        主務大臣認定の養成講習を就任前3年以内に受講する
+                    </p>
+                </div>
+                <div class="flow-step reveal reveal-delay-2" style="padding:2rem 1rem;">
+                    <div class="step-circle" style="width:64px;height:64px;font-size:1.4rem;">
+                        🔄<span class="step-num">3</span>
+                    </div>
+                    <h3 class="step-title" style="font-size:1rem;">経過措置確認</h3>
+                    <p class="step-body" style="font-size:0.82rem;">
+                        旧制度の監理責任者等講習修了者は当分の間、修了とみなされる
+                    </p>
+                </div>
+                <div class="flow-step reveal reveal-delay-3" style="padding:2rem 1rem;">
+                    <div class="step-circle" style="width:64px;height:64px;font-size:1.4rem;">
+                        🛡<span class="step-num">4</span>
+                    </div>
+                    <h3 class="step-title" style="font-size:1rem;">独立性確認</h3>
+                    <p class="step-body" style="font-size:0.82rem;">
+                        実施者・機関との過去5年の関係・親族関係・顧問関係がないことを確認
+                    </p>
+                </div>
+                <div class="flow-step reveal" style="padding:2rem 1rem; --delay:0.4s;">
+                    <div class="step-circle" style="width:64px;height:64px;font-size:1.4rem; border-color:var(--gold-light); background:rgba(200,151,58,0.15);">
+                        🚀<span class="step-num" style="background:var(--gold-light);">5</span>
+                    </div>
+                    <h3 class="step-title" style="font-size:1rem;">実務開始</h3>
+                    <p class="step-body" style="font-size:0.82rem;">
+                        3か月ごと業務確認・年1回同行監査・外部通報受付を開始する
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DUTY TABLE ===== -->
+    <section class="duty-section">
+        <div class="duty-inner">
+            <div class="section-label reveal" style="text-align:center">DUTIES & FREQUENCY</div>
+            <h2 class="section-title reveal" style="text-align:center">具体的な役割と<br>監査の頻度</h2>
+            <div class="gold-line center reveal"></div>
+            <p class="section-body reveal" style="text-align:center; max-width:640px; margin:0 auto;">
+                監査は監理支援機関が管理する「各事業所ごと」に以下の頻度で行う必要があります
+            </p>
+
+            <table class="duty-table reveal">
+                <thead>
+                    <tr>
+                        <th>監査の種類</th>
+                        <th>頻度</th>
+                        <th>主な目的・内容</th>
+                        <th>提出書類</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>業務遂行状況の確認</strong></td>
+                        <td><span class="duty-freq">📅 3か月に1回以上</span></td>
+                        <td>事務所の書類閲覧や責任者からの報告を通じ、適正な業務遂行を定期的に確認する</td>
+                        <td>業務確認の結果を記載した書類</td>
+                    </tr>
+                    <tr>
+                        <td><strong>同行監査</strong></td>
+                        <td><span class="duty-freq">📅 1年に1回以上</span></td>
+                        <td>監理支援機関が行う実地監査に同行し、現場の状況を直接確認して報告書を提出する</td>
+                        <td>同行監査の結果を記載した書類</td>
+                    </tr>
+                    <tr>
+                        <td><strong>外部通報窓口</strong></td>
+                        <td><span class="duty-freq">📞 随時対応</span></td>
+                        <td>育成就労外国人からの相談や不正の通報を直接受ける窓口としての役割も期待される</td>
+                        <td>相談・通報記録（適宜）</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ===== INDEPENDENCE ===== -->
+    <section class="indep-section">
+        <div class="indep-inner">
+            <div class="section-label reveal">INDEPENDENCE RULES</div>
+            <h2 class="section-title reveal">就任できない者<br>— 独立性・外部性の要件 —</h2>
+            <div class="gold-line reveal"></div>
+            <p class="section-body reveal" style="max-width:680px;">
+                外部監査人の価値は「中立性」に集約されます。監査対象との癒着を防ぐため、以下のいずれかに該当する者は就任できません。
+            </p>
+            <div class="excl-grid">
+                <div class="excl-item reveal">
+                    <div class="excl-badge">✕</div>
+                    <div class="excl-text">
+                        <strong>育成就労実施者の関係者</strong>
+                        <span>当該企業の役職員（過去5年以内）、配偶者、または二親等以内の親族</span>
+                    </div>
+                </div>
+                <div class="excl-item reveal reveal-delay-1">
+                    <div class="excl-badge">✕</div>
+                    <div class="excl-text">
+                        <strong>監理支援機関の関係者</strong>
+                        <span>役職員（過去5年以内）、構成員、定期的に会費等を受領している法人</span>
+                    </div>
+                </div>
+                <div class="excl-item reveal reveal-delay-2">
+                    <div class="excl-badge">✕</div>
+                    <div class="excl-text">
+                        <strong>その他の制度関係者</strong>
+                        <span>他の監理支援機関・実施者・外国の送出機関の役職員</span>
+                    </div>
+                </div>
+                <div class="excl-item reveal reveal-delay-3">
+                    <div class="excl-badge">✕</div>
+                    <div class="excl-text">
+                        <strong>密接な関係がある者（利害関係者）</strong>
+                        <span>顧問弁護士・顧問コンサルタント、定期的に会費を受領している者</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ===== TRANSITION ===== -->
+    <section class="trans-section">
+        <div class="trans-inner">
+            <div class="section-label reveal" style="text-align:center">TRANSITIONAL MEASURES</div>
+            <h2 class="section-title reveal" style="text-align:center">制度移行に伴う<br>経過措置と有効期限</h2>
+            <div class="gold-line center reveal"></div>
+            <p class="section-body reveal" style="text-align:center; max-width:640px; margin:0 auto;">
+                旧制度（技能実習制度）での学びをそのまま新制度に活用できる経過措置が設けられています
+            </p>
+
+            <div class="trans-flow reveal">
+                <div class="trans-box">
+                    <div class="trans-box-sub">旧制度</div>
+                    <div class="trans-box-title">技能実習制度<br>監理責任者等講習</div>
+                </div>
+                <div class="trans-arrow-icon">→</div>
+                <div class="trans-box" style="background:rgba(200,151,58,0.06); border-color:rgba(200,151,58,0.35);">
+                    <div class="trans-box-sub">当分の間・みなし規定</div>
+                    <div class="trans-box-title" style="color:var(--gold);">育成就労制度<br>外部監査人講習（修了とみなす）</div>
+                </div>
+            </div>
+
+            <div class="trans-note reveal">
+                ⚠️ <strong>有効期限：</strong>許可申請時を起算日として「過去3年以内」であること<br>
+                📄 <strong>証明書類：</strong>申請時に講習受講証明書の写しの提出が必要です<br>
+                💡 <strong>法人の場合：</strong>実際に監査を担当する個人が受講していることが必要です
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CHECKLIST ===== -->
+    <section class="checklist-section" id="checklist">
+        <div class="checklist-inner">
+            <div class="section-label reveal" style="text-align:center">COMPLIANCE CHECKLIST</div>
+            <h2 class="section-title reveal" style="text-align:center">コンプライアンス<br>確認チェックリスト</h2>
+            <div class="gold-line center reveal"></div>
+            <p class="section-body reveal" style="text-align:center; max-width:640px; margin:0 auto;">
+                監理支援機関の許可申請・更新時に確認すべき項目をまとめました
+            </p>
+
+            <div class="check-columns">
+                <div class="check-col reveal">
+                    <div class="check-col-title">🏢 監理支援機関</div>
+                    <ul class="check-list">
+                        <li><div class="chk"></div><span>非営利法人（商工会議所・中小企業団体・職業訓練法人・農業協同組合等）である</span></li>
+                        <li><div class="chk"></div><span>債務超過の状態にない（財産的基礎の確保）</span></li>
+                        <li><div class="chk"></div><span>人員配置基準（実施者数÷8、外国人数÷40）を両方満たす</span></li>
+                        <li><div class="chk"></div><span>常勤役職員が2名以上いる</span></li>
+                        <li><div class="chk"></div><span>個室（約20㎡以上）の相談室がある</span></li>
+                        <li><div class="chk"></div><span>24時間緊急連絡体制（夜間・休日含む）が整備されている</span></li>
+                        <li><div class="chk"></div><span>監理支援責任者が常勤で、過去3年以内に講習を修了し、実施者と密接関係がない</span></li>
+                    </ul>
+                </div>
+                <div class="check-col reveal reveal-delay-1">
+                    <div class="check-col-title">🔍 外部監査人</div>
+                    <ul class="check-list">
+                        <li><div class="chk"></div><span>有資格者（弁護士・社会保険労務士・行政書士）または有識者（大学教授等）である</span></li>
+                        <li><div class="chk"></div><span>過去5年以内に実施者・機関の役職員ではない</span></li>
+                        <li><div class="chk"></div><span>二親等以内の親族関係がない</span></li>
+                        <li><div class="chk"></div><span>顧問契約や定期的会費受領関係がない</span></li>
+                        <li><div class="chk"></div><span>養成講習（または経過措置講習）を修了済みである</span></li>
+                        <li><div class="chk"></div><span>受講証明書の有効期限が3年以内である</span></li>
+                        <li><div class="chk"></div><span>氏名・名称の公表に同意している</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== QA ===== -->
+    <section class="qa-section">
+        <div class="qa-inner">
+            <div class="section-label reveal" style="text-align:center">Q &amp; A</div>
+            <h2 class="section-title reveal" style="text-align:center; margin-bottom:3rem;">よくあるご質問</h2>
+
+            <div class="qa-item reveal">
+                <button class="qa-question" onclick="toggleQA(this)">
+                    <span class="qa-q-num">Q1</span>
+                    <span class="qa-q-text">社労士・行政書士は外部監査人になれますか？</span>
+                    <span class="qa-arrow">▼</span>
+                </button>
+                <div class="qa-answer">
+                    <strong>はい、なることができます。</strong> 社会保険労務士・行政書士・弁護士は、外部監査人の対象資格として明示されています。ただし、対象となる監理支援機関や実施者との過去5年以内の関係がないこと、顧問契約等の密接な関係がないことが前提条件となります。
+                </div>
+            </div>
+
+            <div class="qa-item reveal">
+                <button class="qa-question" onclick="toggleQA(this)">
+                    <span class="qa-q-num">Q2</span>
+                    <span class="qa-q-text">既に技能実習制度の講習を受けていますが、再受講は必要ですか？</span>
+                    <span class="qa-arrow">▼</span>
+                </button>
+                <div class="qa-answer">
+                    <strong>当分の間は再受講不要です。</strong> 旧制度の「監理責任者等講習」修了者は、当分の間、育成就労制度の外部監査人講習を修了したとみなされます。ただし、許可申請時を起算日として「過去3年以内」の有効期限の範囲内であることが必要です。申請時には受講証明書の写しの提出が必要です。
+                </div>
+            </div>
+
+            <div class="qa-item reveal">
+                <button class="qa-question" onclick="toggleQA(this)">
+                    <span class="qa-q-num">Q3</span>
+                    <span class="qa-q-text">顧問先の監理支援機関の外部監査人になれますか？</span>
+                    <span class="qa-arrow">▼</span>
+                </button>
+                <div class="qa-answer">
+                    <strong>なることはできません。</strong> 顧問契約を締結している機関・実施者は「密接な関係にある者」に該当するため、外部監査人への就任は不可とされています。中立性・独立性の確保が制度の根幹であるため、この要件は厳格に適用されます。
+                </div>
+            </div>
+
+            <div class="qa-item reveal">
+                <button class="qa-question" onclick="toggleQA(this)">
+                    <span class="qa-q-num">Q4</span>
+                    <span class="qa-q-text">法人として就任することはできますか？</span>
+                    <span class="qa-arrow">▼</span>
+                </button>
+                <div class="qa-answer">
+                    <strong>可能です。</strong> 弁護士法人・社会保険労務士法人・行政書士法人として就任することができます。ただし、法人として就任する場合でも、実際に監査業務を担当する個人が所定の養成講習を受講している必要があります。
+                </div>
+            </div>
+
+            <div class="qa-item reveal">
+                <button class="qa-question" onclick="toggleQA(this)">
+                    <span class="qa-q-num">Q5</span>
+                    <span class="qa-q-text">監査業務の実際の負担はどのくらいですか？</span>
+                    <span class="qa-arrow">▼</span>
+                </button>
+                <div class="qa-answer">
+                    <strong>各事業所につき年4回以上の業務確認と、年1回の同行監査が最低限必要です。</strong> 業務確認は書類閲覧や責任者へのヒアリングが中心で、同行監査は監理支援機関による実地監査に立ち会います。また、外国人からの外部通報窓口としての機能も期待されています。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PDF VIEWER ===== -->
+    <section class="pdf-section" id="pdf-docs">
+        <div class="pdf-inner">
+            <div class="section-label reveal" style="text-align:center">DOCUMENTS</div>
+            <h2 class="section-title reveal" style="text-align:center">関連資料の<br>ダウンロード</h2>
+            <div class="gold-line center reveal"></div>
+            <p class="section-body reveal" style="text-align:center; max-width:640px; margin:0 auto;">
+                制度の詳細をPDFでご確認いただけます。ブラウザ上でプレビューし、そのままダウンロードが可能です。
+            </p>
+
+            <div class="pdf-cards">
+
+                <!-- PDF 1 -->
+                <div class="pdf-card reveal">
+                    <div class="pdf-card-header">
+                        <div class="pdf-card-icon">📘</div>
+                        <div class="pdf-card-meta">
+                            <div class="pdf-card-label">Governance Guide &middot; 13 Pages</div>
+                            <div class="pdf-card-title">育成就労制度：ガバナンスと適正化の全貌<br><span style="font-weight:400; font-size:0.85em;">監理支援機関の許可基準と外部監査人の選任要件</span></div>
+                        </div>
+                    </div>
+                    <div class="pdf-iframe-wrap">
+                        <iframe
+                            src="Ikusei_Shuro_Governance_Framework.pdf#toolbar=1&navpanes=0&scrollbar=1&view=FitH"
+                            title="育成就労制度 ガバナンスと適正化の全貌"
+                            loading="lazy"
+                        ></iframe>
+                    </div>
+                    <div class="pdf-card-footer">
+                        <span class="pdf-pages">実務家・監理支援機関向けガイドブック</span>
+                        <a href="Ikusei_Shuro_Governance_Framework.pdf"
+                           download="育成就労制度_ガバナンスと適正化の全貌.pdf"
+                           class="pdf-dl-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            PDFをダウンロード
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PDF 2 -->
+                <div class="pdf-card reveal reveal-delay-1">
+                    <div class="pdf-card-header">
+                        <div class="pdf-card-icon">📗</div>
+                        <div class="pdf-card-meta">
+                            <div class="pdf-card-label">Career Guide &middot; 5 Pages</div>
+                            <div class="pdf-card-title">外部監査人養成ステップガイド<br><span style="font-weight:400; font-size:0.85em;">専門職としてのキャリア形成と継続的学習の道標</span></div>
+                        </div>
+                    </div>
+                    <div class="pdf-iframe-wrap">
+                        <iframe
+                            src="外部監査人養成ステップガイド_専門職としてのキャリア形成と継続的学習の道標.pdf#toolbar=1&navpanes=0&scrollbar=1&view=FitH"
+                            title="外部監査人養成ステップガイド"
+                            loading="lazy"
+                        ></iframe>
+                    </div>
+                    <div class="pdf-card-footer">
+                        <span class="pdf-pages">外部監査人キャリア形成ガイドブック</span>
+                        <a href="外部監査人養成ステップガイド_専門職としてのキャリア形成と継続的学習の道標.pdf"
+                           download="外部監査人養成ステップガイド.pdf"
+                           class="pdf-dl-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            PDFをダウンロード
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-section" id="cta">
+        <div class="cta-bg"></div>
+        <div class="cta-content">
+            <div class="section-label reveal" style="margin-bottom:1.5rem;">CLOSING</div>
+            <h2 class="cta-title reveal">
+                制度の信頼を守る<br>
+                <span class="gold">「良心の要」として歩み続けるために。</span>
+            </h2>
+            <div class="gold-line center reveal"></div>
+            <p class="cta-body reveal">
+                外部監査人は、育成就労制度が社会から信頼されるための最後の砦です。<br>
+                あなたの厳格な視点と専門的な指導が、外国人労働者の権利を守り、<br>
+                日本企業の健全な国際化を支えます。
+            </p>
+            <div class="cta-box reveal">
+                <p class="cta-proposer">
+                    <strong>外部監査人 就任に必要な3つのポイント</strong><br><br>
+                    ① 専門資格と知見 — 弁護士・社労士・行政書士または有識者であること<br>
+                    ② 継続的な自己研鑽 — 3年以内の受講と3年ごとの更新を欠かさないこと<br>
+                    ③ 厳格な中立性の維持 — 過去5年の経歴・顧問関係を含むクリーンな立場を堅持すること
+                </p>
+            </div>
+            <p style="font-family:'Noto Serif JP',serif; font-size:1.05rem; color:var(--teal); font-weight:700; line-height:1.8;">
+                「厳格な独立性と適正な資格要件が、育成就労制度の信頼を支えます。」
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 育成就労制度 外部監査人 完全ガイド — 実務家・監理支援機関向けガイドブック</p>
+        <p style="margin-top:0.5rem;">本資料はNotebookLMの学習コンテンツをもとに作成したものです。最新の法令・告示を必ずご確認ください。</p>
+        <div style="margin-top:1.2rem; padding-top:1.2rem; border-top:1px solid rgba(100,180,130,0.2);">
+            <p style="font-size:0.82rem; color:var(--teal); font-weight:700; margin-bottom:0.5rem;">📢 最新情報</p>
+            <p style="font-size:0.85rem; line-height:1.8;">
+                育成就労制度の手引きに当たる「育成就労制度運用要領」を本日公表しました。<br>
+                <a href="https://www.moj.go.jp/isa/content/001457363.pdf"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   style="color:var(--gold); font-weight:700; text-decoration:underline; text-underline-offset:3px; transition:opacity 0.2s;"
+                   onmouseover="this.style.opacity='0.75'"
+                   onmouseout="this.style.opacity='1'">
+                    📄 育成就労制度運用要領（法務省・出入国在留管理庁）→ こちらからご確認ください
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== SCROLL REVEAL =====
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        reveals.forEach(el => observer.observe(el));
+
+        // ===== QA ACCORDION =====
+        function toggleQA(btn) {
+            const answer = btn.nextElementSibling;
+            const arrow = btn.querySelector('.qa-arrow');
+            const isOpen = answer.style.display === 'block';
+            answer.style.display = isOpen ? 'none' : 'block';
+            arrow.classList.toggle('open', !isOpen);
+        }
+    </script>
+</body>
+</html>
